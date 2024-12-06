@@ -1,0 +1,4 @@
+scipy
+zeroconf
+h5py
+tabulate
