@@ -27,7 +27,9 @@ class AgilentMeasurement:
     def initialize(self):
         rm = visa.ResourceManager()
         instrument_list = rm.list_resources()
-        self.instrument = rm.open_resource(instrument_list[6])
+        print(instrument_list[0]) # for now the only resource we are having is GPIB0::12::INSTR  
+        # that is exactly what we need but hardcoding here is not a good approach at all. Need to update this
+        self.instrument = rm.open_resource(instrument_list[0])
         devicename = self.instrument.query('*IDN?')
         print(devicename)
         self.instrument.write('ESNB 1')
