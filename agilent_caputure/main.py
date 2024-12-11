@@ -12,13 +12,14 @@ current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 f.name = str(current_time)
 
 # Duration in seconds
-f.duration = (17 + 0.5) * 10
+# f.duration = 10*100 #(17 + 0.5) * 5
 
 # Number of points
 f.points = 801
 
 # Sample time in seconds (ToDo: minimum 500, get_measurement is slow)
-f.sampletime = 500
+f.sampletime = 100
+f.duration = 10*f.sampletime #(17 + 0.5) * 5
 
 # Start the measurement
 f.start()
