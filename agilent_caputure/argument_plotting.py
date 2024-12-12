@@ -44,35 +44,42 @@ def plot_sweep_data(sweep_number, frequency, magnitude, phase):
     real = mag * np.cos(np.radians(phs))
     imag = mag * np.sin(np.radians(phs))
 
+    fig, ax = plt.subplots(2, 1, figsize=(8, 10))  # Two rows, one column
+
     # Bode plot: Magnitude vs Frequency
-    plt.figure()
-    plt.loglog(freq, mag)
-    plt.xlabel('Frequency (Hz)')
-    plt.ylabel('Magnitude (Ohms)')
-    plt.title(f'Sweep {sweep_number+1}: Bode Plot (Magnitude)')
-    plt.grid(True, which='both', linestyle='--')
-    plt.show()
+    ax[0].loglog(freq, mag)  # Use log-log scale for Magnitude plot
+    ax[0].set_xlabel('Frequency (Hz)')
+    ax[0].set_ylabel('Magnitude (Ohms)')
+    ax[0].set_title(f'Sweep {sweep_number+1}: Bode Plot (Magnitude)')
+    ax[0].grid(True, which='both', linestyle='--')  # Add grid lines
 
     # Bode plot: Phase vs Frequency
-    plt.figure()
-    plt.semilogx(freq, phs)
-    plt.xlabel('Frequency (Hz)')
-    plt.ylabel('Phase (Degrees)')
-    plt.title(f'Sweep {sweep_number+1}: Bode Plot (Phase)')
-    plt.grid(True, which='both', linestyle='--')
+    ax[1].semilogx(freq, phs)  # Use semilogx scale for Phase plot
+    ax[1].set_xlabel('Frequency (Hz)')
+    ax[1].set_ylabel('Phase (Degrees)')
+    ax[1].set_title(f'Sweep {sweep_number+1}: Bode Plot (Phase)')
+    ax[1].grid(True, which='both', linestyle='--')  # Add grid lines
+
+    # Adjust layout to prevent overlap
+    plt.tight_layout()
+
+    # Show the combined plot
     plt.show()
 
-    # Nyquist plot: Imaginary vs Real Impedance
-    plt.figure()
-    plt.plot(real, imag, label='Impedance')
-    plt.xlabel('Real Part (Ohms)')
-    plt.ylabel('Imaginary Part (Ohms)')
-    plt.title(f'Sweep {sweep_number+1}: Nyquist Plot')
-    plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
-    plt.axvline(0, color='black', linewidth=0.8, linestyle='--')
-    plt.grid(True, which='both', linestyle='--')
-    plt.legend()
-    plt.show()
+
+    # plt.figure()
+    # plt.plot(real, imag, label='Impedance')
+    # plt.xlabel('Real Part (Ohms)')
+    # plt.ylabel('Imaginary Part (Ohms)')
+    # plt.title(f'Sweep {sweep_number+1}: Nyquist Plot')
+    # plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
+    # plt.axvline(0, color='black', linewidth=0.8, linestyle='--')
+    # plt.grid(True, which='both', linestyle='--')
+    # #plt.axis('equal')  # Ensure the same scale for both axes
+    # #plt.gca().set_aspect('equal', adjustable='datalim')
+    # plt.legend()
+    # plt.show()
+
 
 # Main function to run the plotter for a specific sweep
 def main():
